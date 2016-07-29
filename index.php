@@ -12,11 +12,11 @@ if(isset($_GET['deconnexion'])){
 if(isset($_SESSION['perso'])){
 	$perso = $_SESSION['perso'];
 }
-$db = new PDO('mysql:host=localhost;dbname=mini_jeu_de_combat;charset=utf8', 'tp', 'pt', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+$db = new PDO('mysql:host=localhost;dbname=tp_mini_jeu_de_combat;charset=utf8', 'tp', 'pt', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 $pm = new PersonnageManager($db);
 
 if (isset($_POST['nom'])){
-	$nom = $_POST['nom'];
+	$nom = htmlspecialchars($_POST['nom']);
 	if (isset($_POST['creer'])){
 		if (Personnage::nomValide($nom)){
 			if ( $pm->existe($nom)){
